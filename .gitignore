@@ -1,5 +1,6 @@
 # ignore folders
 .source/
+tests/.misc/
 
 # ignore files
 .source/vars.env

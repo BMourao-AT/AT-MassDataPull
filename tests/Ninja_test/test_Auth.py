@@ -34,3 +34,13 @@ def get_auth():
     except (ValueError, requests.exceptions.RequestException) as e:
         print(f'Failed to validate, review code: {e}')
         return None
+    
+if __name__ == "__main__":
+    auth_Data = get_auth()
+    if not auth_Data["auth_Token"]:
+        print("No access token given.")
+    else:
+        print(f'Authentication Token is: {auth_Data["auth_Token"]}')
+        print(f'TTL is: {auth_Data["ttl"]}')
+        print(f'Scope is: {auth_Data["scope"]}')
+        print(f'Token Type is: {auth_Data["token_type"]}')

@@ -35,15 +35,25 @@ def mail_distro():
     return
 
 # Cove
+coveAuth = Cove.get_auth()
 
 
 # Ninja
+ninjaAuth = Ninja.get_auth() # this returns a dictionary
 
 
 # O365
+O365Auth = O365.get_auth()
 
 
 # ScreenConnect
+screenconnectAuth = ScreenConnect.get_auth()
 
 
 # SentinelOne
+sentintelAuth = SentinelOne.get_auth()
+
+
+# main script
+if __name__ == "__main__":
+    # fill
