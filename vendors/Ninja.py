@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=env_path)
 
 base_url = os.getenv("NINJA_BASE_URL")
 
-# Function for authentication
+# get 
 def get_auth():
     auth_url = os.getenv("NINJA_AUTH_ENDPOINT")
     payload = {
@@ -28,27 +28,24 @@ def get_auth():
     return auth_Data
 
 # Get orgs
-def get_orgs(auth_key):
+def get_orgs(auth_Token):   
     endpoint = os.getenv("NINJA_ORGS_ENDPOINT")
     url = f'{base_url}{endpoint}'
+    
     headers = {
-        "Authorization": f'Bearer {auth_key}',
+        "Authorization": f'Bearer {auth_Token}',
         "Accept": "application/json"
     }
+    
     resp = requests.get(url, headers=headers)
-    orgs = resp.json()    
-    return orgs
+    orgData = resp.json()
+    return orgData
 
 # Get devices
-def get_devices(auth_key):
+def get_devices(auth_Token):
     devs = ''
     return devs
 
 # main program
 auth_key = get_auth()
 print(auth_key)
-
-orgs_list = get_orgs(auth_key)
-for org in orgs_list:
-    print(f'Organization Name: {org["name"]}')
-#devs = get_devices(auth_key)
