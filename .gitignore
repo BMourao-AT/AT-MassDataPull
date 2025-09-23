@@ -1,6 +1,9 @@
-# ignore folder
+# ignore folders
 .source/
 
-#ignore file
+# ignore files
 .source/vars.env
 .source/distribution.txt
+
+# ignore filetypes
+*.pyc

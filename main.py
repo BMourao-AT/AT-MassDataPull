@@ -1,39 +1,15 @@
-# ======== SYNOPSIS =========
-#       Automated collection script for managed portals.
-#
-# ======= DESCRIPTION =======
-#       Calls to various API endpoints and pulls information on devices, accounts, config,
-#       specs, etc. and consolidates it into a .csv file.
-#
-#       Then, it prepares and sends an email through SMTP to any emails
-#       present in .\source\distribution.txt
-#
-# ========== NOTES ==========
-#       Author: Arrow Team
-#       Prerequisites:
-#           - 
-
 import os
 import requests
 from dotenv import load_dotenv
 from pathlib import Path
 
-# import the various vendor scripts
+# import custom functions
+import validation
 from vendors import Cove
 from vendors import Ninja
 from vendors import O365
 from vendors import ScreenConnect
 from vendors import SentinelOne
-
-# Create log folder/files for reviewing
-def generate_logs():
-    # create a folder called "logs_[date/time]"
-    #for [file] in [vendors folder]:
-        # create a file called "[vendor]_log_[date/time]".txt in the logs folder just made
-    return
-
-def structure_check():
-    return
 
 # Prompt to add users to the email delivery list
 def mail_distro():

@@ -19,8 +19,13 @@ def get_auth():
     }
     resp = requests.post(auth_url, data=payload)
     resp = resp.json()
-    auth_key = resp["access_token"] # auth key given to the session
-    return auth_key
+    auth_Data = {
+            "auth_Token": resp.get("access_token"),
+            "ttl": resp.get("expires_in"),
+            "scope": resp.get("scope"),
+            "token_Type": resp.get("token_type")
+        }
+    return auth_Data
 
 # Get orgs
 def get_orgs(auth_key):
