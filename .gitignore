@@ -1,6 +1,8 @@
 # ignore folders
 .source/
 tests/.misc/
+tests/.logs/*
+!tests/.logs/.gitkeep
 
 # ignore files
 .source/vars.env
