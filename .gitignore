@@ -1,0 +1,6 @@
+# ignore folder
+.source/
+
+#ignore file
+.source/vars.env
+.source/distribution.txt
