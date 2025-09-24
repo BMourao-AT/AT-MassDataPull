@@ -1,10 +1,6 @@
 # AT-MassDataPull
-Scripts/processes to collect data from multiple vendors
-
-Included is a ".source [sample]" folder, this includes the needed .env file and distributions.txt referenced in the scripts. Rename this folder to just ".source" and edit the keys in the .env file to include any keys you are using
-
 ## SYNOPSIS
-Automated collection script for managed portals.
+Automated collection of scripts/processes to collect data from multiple dashboards and consolidate them into a single format for viewing.
 
 ## DESCRIPTION
 Calls to various API endpoints and pulls information on devices, accounts, config, specs, etc. and consolidates it into a .csv file.
@@ -15,4 +11,6 @@ Then, it prepares and sends an email through SMTP to any emails present in .\sou
 Arrow Team | Brendon Mourao
 
 ## NOTES
+Included is a ".source [sample]" folder, this includes the needed .env file & distributions.txt referenced in the scripts. These two files are used to build various variables witin the script and where to send the results (results are always saved locally).
 
+Rename this folder to just ".source" and edit the keys in the .env file as needed.
