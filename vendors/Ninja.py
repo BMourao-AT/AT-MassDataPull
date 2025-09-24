@@ -5,14 +5,14 @@ from pathlib import Path
 
 # get 
 def get_auth(envData):
-    auth_url = envData.get("NINJA_AUTH_ENDPOINT")
+    authURL = envData.get("NINJA_AUTH_ENDPOINT")
     payload = {
         "grant_type": "client_credentials",
         "client_id": envData.get("NINJA_CLIENT_ID"),
         "client_secret": envData.get("NINJA_CLIENT_SECRET"),
         "scope": "monitoring"
     }
-    resp = requests.post(auth_url, data=payload)
+    resp = requests.post(authURL, data=payload)
     resp = resp.json()
     authData = {
             "authToken": resp.get("access_token"),
@@ -23,7 +23,7 @@ def get_auth(envData):
     return authData
 
 # Get orgs
-def get_orgs(envData, baseURL, authToken):   
+def get_orgs(envData, baseURL, authToken):
     endpoint = envData.get("NINJA_ORGS_ENDPOINT")
     url = f'{baseURL}{endpoint}'
     
@@ -33,7 +33,7 @@ def get_orgs(envData, baseURL, authToken):
     }
     
     resp = requests.get(url, headers=headers)
-    orgData = resp.json()
+    orgData = resp.json() 
     return orgData
 
 # Get devices
@@ -50,13 +50,31 @@ def get_devices(envData, baseURL, authToken):
     deviceData = resp.json()
     return deviceData
 
+def consolidate(orgData, deviceData):
+    customerSummary = []
+    orgData = sorted(orgData, key=lambda x: x["name"])
+    for org in orgData:
+        customerSummary.append({
+            "OrgName": org["name"],
+            "OrgID": org["id"],
+            "DeviceCount": 0
+        })
+    for device in deviceData:
+        deviceOrg = device.get("organizationId")
+        for customer in customerSummary:
+            if deviceOrg == customer["OrgID"]:
+                customer["DeviceCount"] += 1
+                break
+    return customerSummary
+
 # main program
 if __name__ == "__main__":
     path_env = Path(__file__).resolve().parent.parent / ".source" / ".env" # Resolve path to ../.source/.env relative to this file
     load_dotenv(dotenv_path=path_env)
     envData = dict(os.environ)
+    baseURL=os.getenv("NINJA_BASE_URL")
     
     authData = get_auth(envData)
     authToken = authData["authToken"]
     
-    print(get_devices(envData=envData, baseURL=envData.get("NINJA_BASE_URL"), authToken=authToken))
+    print(get_devices(envData=envData, baseURL=baseURL, authToken=authToken))

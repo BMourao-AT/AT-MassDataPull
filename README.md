@@ -3,7 +3,7 @@
 Automated collection of scripts/processes to collect data from multiple dashboards and consolidate them into a single format for viewing.
 
 ## DESCRIPTION
-Calls to various API endpoints and pulls information on devices, accounts, config, specs, etc. and consolidates it into a .csv file.
+Calls to various API endpoints and pulls information on licensing and consolidates it into a .csv file.
 
 Then, it prepares and sends an email through SMTP to any emails present in .\source\distribution.txt
 

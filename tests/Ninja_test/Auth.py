@@ -19,28 +19,28 @@ def get_auth():
         resp.raise_for_status()
         resp = resp.json()
         
-        auth_Data = {
-            "auth_Token": resp.get("access_token"),
+        authData = {
+            "authToken": resp.get("access_token"),
             "ttl": resp.get("expires_in"),
             "scope": resp.get("scope"),
-            "token_Type": resp.get("token_type")
+            "tokenType": resp.get("token_type")
         }
         
-        if not auth_Data["auth_Token"]:
+        if not authData["authToken"]:
             print("No access token given.")
             return None
 
-        return auth_Data
+        return authData
     except (ValueError, requests.exceptions.RequestException) as e:
         print(f'Failed to validate, review code: {e}')
         return None
     
 if __name__ == "__main__":
-    auth_Data = get_auth()
-    if not auth_Data["auth_Token"]:
+    authData = get_auth()
+    if not authData["authToken"]:
         print("No access token given.")
     else:
-        print(f'Authentication Token is: {auth_Data["auth_Token"]}')
-        print(f'TTL is: {auth_Data["ttl"]}')
-        print(f'Scope is: {auth_Data["scope"]}')
-        print(f'Token Type is: {auth_Data["token_type"]}')
+        print(f'Authentication Token is: {authData["authToken"]}')
+        print(f'TTL is: {authData["ttl"]}')
+        print(f'Scope is: {authData["scope"]}')
+        print(f'Token Type is: {authData["tokenType"]}')

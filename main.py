@@ -17,6 +17,9 @@ path_env = Path(__file__).resolve().parent.parent / ".source" / ".env" # Resolve
 load_dotenv(dotenv_path=path_env)
 envData = dict(os.environ)
 
+def writeTo_Logs():
+    return
+
 # Cove
 coveAuth = Cove.get_auth()
 
@@ -26,8 +29,10 @@ ninjaURL = os.getenv("NINJA_BASE_URL")
 ninjaAuthData = Ninja.get_auth(envData)
 ninjaToken = ninjaAuthData["access_token"]
 
-Ninja.get_orgs(envData, ninjaURL, ninjaToken)
-Ninja.get_devices(envData, ninjaURL)
+ninjaOrgs = Ninja.get_orgs(envData, ninjaURL, ninjaToken)
+ninjaDevices = Ninja.get_devices(envData, ninjaURL, ninjaToken)
+
+ninjaSummary = Ninja.consolidate(ninjaOrgs, ninjaDevices)
 
 
 # O365
@@ -44,6 +49,5 @@ sentintelAuth = SentinelOne.get_auth()
 
 # main script
 if __name__ == "__main__":
-    validation.check_Logs()
-    validation.check_Source()
-    validation.check_Vendors()
+    for num, org in enumerate(ninjaSummary, start=1):
+        print(f'Organization number {num}: {org}')
