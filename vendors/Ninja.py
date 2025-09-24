@@ -52,7 +52,7 @@ def get_devices(envData, baseURL, authToken):
 
 # main program
 if __name__ == "__main__":
-    path_env = Path(__file__).resolve().parent.parent / ".source" / "vars.env" # Resolve path to ../.source/.env relative to this file
+    path_env = Path(__file__).resolve().parent.parent / ".source" / ".env" # Resolve path to ../.source/.env relative to this file
     load_dotenv(dotenv_path=path_env)
     envData = dict(os.environ)
     

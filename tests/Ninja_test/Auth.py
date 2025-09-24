@@ -5,7 +5,7 @@ from pathlib import Path
 
 def get_auth():
     try:
-        env_path = Path(__file__).resolve().parent.parent.parent / ".source" / "vars.env"
+        env_path = Path(__file__).resolve().parent.parent.parent / ".source" / ".env"
         load_dotenv(dotenv_path=env_path)
         url = os.getenv("NINJA_AUTH_ENDPOINT")
         payload = {
