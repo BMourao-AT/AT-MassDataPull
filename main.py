@@ -5,41 +5,29 @@ from pathlib import Path
 
 # import custom functions
 import validation
+import sendMail
 from vendors import Cove
 from vendors import Ninja
 from vendors import O365
 from vendors import ScreenConnect
 from vendors import SentinelOne
 
-# Prompt to add users to the email delivery list
-def mail_distro():
-    dist_path = Path(__file__).resolve().parent / ".source" / "distribution.txt"
-    with open(dist_path, "r", encoding="utf-8") as f:
-        content = f.read()
-    send_to = [address.strip() for address in content.split(";") if address.strip()]
-    
-    print(f'Currently, SMTP alerts are set up to go to {os.getenv("TO_EMAIL_ADDRESS")} by default along with:')
-    for num, em_address in enumerate(send_to, start=1):
-        print(f'{num}. {em_address}')
-
-    add_more = input("Would you like to add more? (Y/N): ")
-    while add_more not in ["Y" or "y" or "N" or "n"]:
-        add_more = input("Invalid input. Try again. (Y/N): ")
-    if add_more == "Y" or "y":
-        while True:
-            new_address = input('Add another address: (press enter when finished): ')
-            if new_address == "":
-                break
-            with open(".source/distribution.txt", "a", encoding="utf-8") as new_distro:
-                new_distro.write(f"{new_address};\n")
-    return
+# Load the .env file
+path_env = Path(__file__).resolve().parent.parent / ".source" / "vars.env" # Resolve path to ../.source/.env relative to this file
+load_dotenv(dotenv_path=path_env)
+envData = dict(os.environ)
 
 # Cove
 coveAuth = Cove.get_auth()
 
 
 # Ninja
-ninjaAuth = Ninja.get_auth() # this returns a dictionary
+ninjaURL = os.getenv("NINJA_BASE_URL")
+ninjaAuthData = Ninja.get_auth(envData)
+ninjaToken = ninjaAuthData["access_token"]
+
+Ninja.get_orgs(envData, ninjaURL, ninjaToken)
+Ninja.get_devices(envData, ninjaURL)
 
 
 # O365
@@ -56,4 +44,6 @@ sentintelAuth = SentinelOne.get_auth()
 
 # main script
 if __name__ == "__main__":
-    # fill
+    validation.check_Logs()
+    validation.check_Source()
+    validation.check_Vendors()

@@ -3,7 +3,7 @@ import requests
 from dotenv import load_dotenv
 from pathlib import Path
 
-import test_Auth
+import Auth
 
 def get_orgs(auth_Token):
     env_path = Path(__file__).resolve().parent.parent.parent / ".source" / "vars.env"
@@ -22,7 +22,7 @@ def get_orgs(auth_Token):
     return orgs
 
 if __name__ == "__main__":
-    auth_Data = test_Auth.get_auth()
+    auth_Data = Auth.get_auth()
     if not auth_Data["auth_Token"]:
         print("No access token given.")
     else:

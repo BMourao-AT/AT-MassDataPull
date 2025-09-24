@@ -1,6 +1,6 @@
 # Run this code to validate structure
 
-def check_logs():
+def check_Logs():
     # check logs folder
     # create a folder called "logs_[date/time]"
     #for [file] in [vendors folder]:
@@ -8,5 +8,8 @@ def check_logs():
     
     return
 
-# check .source FOLDER
-# check vendors folder
+def check_Source():
+    return
+
+def check_Vendors():
+    return
