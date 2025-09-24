@@ -13,7 +13,7 @@ from vendors import ScreenConnect
 from vendors import SentinelOne
 
 # Load the .env file
-path_env = Path(__file__).resolve().parent.parent / ".source" / "vars.env" # Resolve path to ../.source/.env relative to this file
+path_env = Path(__file__).resolve().parent.parent / ".source" / ".env" # Resolve path to ../.source/.env relative to this file
 load_dotenv(dotenv_path=path_env)
 envData = dict(os.environ)
 

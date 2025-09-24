@@ -6,7 +6,7 @@ from pathlib import Path
 import Auth
 
 def get_orgs(auth_Token):
-    env_path = Path(__file__).resolve().parent.parent.parent / ".source" / "vars.env"
+    env_path = Path(__file__).resolve().parent.parent.parent / ".source" / ".env"
     load_dotenv(dotenv_path=env_path)
     base_url = os.getenv("NINJA_BASE_URL")
     endpoint = os.getenv("NINJA_ORGS_ENDPOINT")
