@@ -55,7 +55,8 @@ if __name__ == "__main__":
     path_env = Path(__file__).resolve().parent.parent / ".source" / "vars.env" # Resolve path to ../.source/.env relative to this file
     load_dotenv(dotenv_path=path_env)
     envData = dict(os.environ)
-
+    
     authData = get_auth(envData)
     authToken = authData["authToken"]
+    
     print(get_devices(envData=envData, baseURL=envData.get("NINJA_BASE_URL"), authToken=authToken))
