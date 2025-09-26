@@ -1,12 +1,16 @@
-# ignore folders
+# ignore sensitive data
 .source/
-tests/.misc/
-tests/.logs/*
-!tests/.logs/.gitkeep
 
-# ignore files
-.source/vars.env
-.source/distribution.txt
+# ignore test folder
+tests/
 
-# ignore filetypes
+# ignore logs folder
+logs/
+
+# ignore python cache 
 *.pyc
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+desktop.ini

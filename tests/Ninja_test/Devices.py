@@ -5,10 +5,11 @@ from pathlib import Path
 
 import Auth
 
+env_path = Path(__file__).resolve().parent.parent.parent / ".source" / ".env"
+load_dotenv(dotenv_path=env_path)
+baseURL = os.getenv("NINJA_BASE_URL")
+
 def get_devices(authToken):   
-    env_path = Path(__file__).resolve().parent.parent.parent / ".source" / ".env"
-    load_dotenv(dotenv_path=env_path)
-    baseURL = os.getenv("NINJA_BASE_URL")
     endpoint = os.getenv("NINJA_DEVICES_ENDPOINT")
     url = f'{baseURL}{endpoint}'
     
