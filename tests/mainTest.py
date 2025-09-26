@@ -1,1 +1,0 @@
-# script to test the individual functions and see where its failing
